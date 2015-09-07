@@ -12,19 +12,24 @@ CREATE DATABASE tournament;
 -- Connect to the database
 \c tournament;
 
+-- Drop the tables if they already exist
+DROP TABLE IF EXISTS matches;
+DROP TABLE IF EXISTS players;
+
 -- Create auto increment sequence
 CREATE SEQUENCE ID_SEQUENCE INCREMENT 1 START 0;
 
 -- Create the tables
+
 -- Create Players Table
 CREATE TABLE players (
 	id serial primary key not null nextval(ID_SEQUENCE),
-	name varchar(30)	
+	name varchar(30),
+	wins int	
 );
+
 -- Create Matches Table
 CREATE TABLE matches (
-	p1 varchar(30) references players.name,
-	p2 varchar(30) references players.name,
 	winner int references players.id
 );
 
