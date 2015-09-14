@@ -57,7 +57,7 @@ def registerPlayer(name):
     """
     conn = connect()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO players (name) values (%s);", (name,))
+    cursor.execute("INSERT INTO players (name) VALUES (%s);", (name,))
     conn.commit()
     conn.close()
 
@@ -99,8 +99,7 @@ def reportMatch(winner, loser):
 
     conn = connect()
     cursor = conn.cursor()
-    cursor.execute("""INSERT INTO matches 
-                      VALUES (winner);""")
+    cursor.execute("""INSERT INTO matches VALUES (%s, %s);""", (winner, loser,))
     conn.commit()
     conn.close()
  
@@ -123,9 +122,13 @@ def swissPairings():
 
     conn = connect()
     cursor = conn.cursor()
-    cursor.execute("""SELECT players.id as id1, players.name as name1, players.id as id2, players.name as name2
-                      FROM players, matches
-                      WHERE id1.wins == id2.wins
-                    """)
+    
+    for (player in players):
+        if (players.wins > players.wins):
+            return ([player.id, player.id])
+
+    cursor.execute()
+
+
     conn.commit()
     conn.close()
